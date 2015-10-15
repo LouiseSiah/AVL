@@ -4,13 +4,13 @@
   :file: test_Node.c
 :successes:
 - :test: test_insertTree_insert_9_should_give_one_node_tree_only
-  :line: 10
+  :line: 9
   :message: ''
 - :test: test_insertTree_insert_9_2_should_give_expected_tree
-  :line: 20
+  :line: 19
   :message: ''
 - :test: test_treeBuild_insert_9_2_10_should_return_expect_tree
-  :line: 31
+  :line: 30
   :message: ''
 :failures: []
 :ignores: []

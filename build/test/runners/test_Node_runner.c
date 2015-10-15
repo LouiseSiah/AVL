@@ -48,9 +48,9 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_Node.c");
-  RUN_TEST(test_insertTree_insert_9_should_give_one_node_tree_only, 10);
-  RUN_TEST(test_insertTree_insert_9_2_should_give_expected_tree, 20);
-  RUN_TEST(test_treeBuild_insert_9_2_10_should_return_expect_tree, 31);
+  RUN_TEST(test_insertTree_insert_9_should_give_one_node_tree_only, 9);
+  RUN_TEST(test_insertTree_insert_9_2_should_give_expected_tree, 19);
+  RUN_TEST(test_treeBuild_insert_9_2_10_should_return_expect_tree, 30);
 
   return (UnityEnd());
 }

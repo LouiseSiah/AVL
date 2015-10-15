@@ -16,6 +16,7 @@ void customTestAssertTree(Node *expectedTree, Node *actualTree, int lineNumber)
   
   if(!expectedTree)
   {
+    printf("Expect NULL\n");
     if(actualTree)
       CUSTOM_TEST_FAIL(lineNumber,"Expected NULL but actual was '%d'.", actualTree->data);
   }
@@ -24,6 +25,6 @@ void customTestAssertTree(Node *expectedTree, Node *actualTree, int lineNumber)
   
   if(expectedTree->data != actualTree->data)
     CUSTOM_TEST_FAIL(lineNumber, "Expected '%d' but actual was '%d'.", expectedTree->data, actualTree->data);
-
+  
   customTestAssertTree(expectedTree->right, actualTree->right, lineNumber);
 }

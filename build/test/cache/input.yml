@@ -16,8 +16,8 @@
   :artifacts: []
 :paths:
   :test:
-  - "+:test/**"
-  - "-:test/support"
+  - +:test/**
+  - -:test/support
   :source:
   - src/**
   :support:
@@ -45,16 +45,16 @@
   :commmon: []
 :flags: {}
 :extension:
-  :header: ".h"
-  :source: ".c"
-  :assembly: ".s"
-  :object: ".o"
-  :executable: ".exe"
-  :map: ".map"
-  :list: ".lst"
-  :testpass: ".pass"
-  :testfail: ".fail"
-  :dependencies: ".d"
+  :header: .h
+  :source: .c
+  :assembly: .s
+  :object: .o
+  :executable: .exe
+  :map: .map
+  :list: .lst
+  :testpass: .pass
+  :testfail: .fail
+  :dependencies: .d
 :unity:
   :defines: []
 :cmock:
@@ -89,13 +89,13 @@
     :arguments:
     - -I"$": COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
     - -I"$": COLLECTION_PATHS_TEST_TOOLCHAIN_INCLUDE
-    - "-D$": COLLECTION_DEFINES_TEST_AND_VENDOR
-    - "-DGNU_COMPILER"
-    - "-g"
+    - -D$: COLLECTION_DEFINES_TEST_AND_VENDOR
+    - -DGNU_COMPILER
+    - -g
     - -c "${1}"
     - -o "${2}"
   :test_fixture:
-    :executable: "${1}"
+    :executable: ${1}
     :name: default_test_fixture
     :stderr_redirect: :auto
     :background_exec: :none
@@ -117,12 +117,12 @@
     :background_exec: :none
     :optional: false
     :arguments:
-    - "-E"
+    - -E
     - -I"$": COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
     - -I"$": COLLECTION_PATHS_TEST_TOOLCHAIN_INCLUDE
-    - "-D$": COLLECTION_DEFINES_TEST_AND_VENDOR
-    - "-D$": DEFINES_TEST_PREPROCESS
-    - "-DGNU_COMPILER"
+    - -D$: COLLECTION_DEFINES_TEST_AND_VENDOR
+    - -D$: DEFINES_TEST_PREPROCESS
+    - -DGNU_COMPILER
     - '"${1}"'
     - -o "${2}"
   :test_includes_preprocessor:
@@ -132,15 +132,15 @@
     :background_exec: :none
     :optional: false
     :arguments:
-    - "-E"
-    - "-MM"
-    - "-MG"
-    - "-I$": COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
-    - "-I$": COLLECTION_PATHS_TEST_TOOLCHAIN_INCLUDE
-    - "-D$": COLLECTION_DEFINES_TEST_AND_VENDOR
-    - "-D$": DEFINES_TEST_PREPROCESS
-    - "-DGNU_COMPILER"
-    - "-w"
+    - -E
+    - -MM
+    - -MG
+    - -I$: COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
+    - -I$: COLLECTION_PATHS_TEST_TOOLCHAIN_INCLUDE
+    - -D$: COLLECTION_DEFINES_TEST_AND_VENDOR
+    - -D$: DEFINES_TEST_PREPROCESS
+    - -DGNU_COMPILER
+    - -w
     - '"${1}"'
 :test_compiler:
   :arguments: []
@@ -173,6 +173,6 @@
   :stdout_pretty_tests_report_path: vendor/ceedling/plugins/stdout_pretty_tests_report/lib
   :module_generator_path: vendor/ceedling/plugins/module_generator/lib
 :module_generator:
-  :project_root: "./"
+  :project_root: ./
   :source_root: src/
   :test_root: test/
