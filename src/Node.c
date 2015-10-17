@@ -44,7 +44,6 @@ Node *treeBuild(int num, ...)
   for (i = 0; i < num; i++)
   {
     insertTree(&tree, va_arg(valist, int));
-    //stackPush(stack, va_arg(valist, void*));
   }
   /* clean memory reserved for valist */
   va_end(valist);

@@ -86,3 +86,81 @@ void test_leftRotate_given_tree4_should_rotate_as_expect(void)
   TEST_ASSERT_EQUAL_TREE(0, 45, 0, 0, tree->right->left);
   TEST_ASSERT_EQUAL_TREE(0, 60, 0, 0, tree->right->right);
 }
+
+void test_rightRotate_given_NULL_tree_should_return_NULL(void)
+{
+  Node *tree = NULL;
+  tree = rightRotate(tree);
+  TEST_ASSERT_NULL(tree);
+}
+
+/*          Before               After
+ *          30                    30            
+ *         /  \                  /  \
+ *       NULL NULL             NULL NULL
+ */
+void test_rightRotate_given_tree1_should_not_rotate(void)
+{
+  Node *tree = NULL;
+  insertTree(&tree, 30);
+  tree = rightRotate(tree);
+  TEST_ASSERT_EQUAL_TREE(0, 30, 0, 0, tree);
+}
+
+/*          Before               After
+ *          40                    30
+ *         /  \                  /  \
+ *       30  NULL             NULL   40
+ */
+void test_rightRotate_given_tree2A_should_rotate_as_expect(void)
+{
+  Node *tree = treeBuild(2, 30, 40);
+  tree = rightRotate(tree);
+
+  TEST_ASSERT_EQUAL_TREE(0, 30, 0, 40, tree);
+  TEST_ASSERT_EQUAL_TREE(0, 40, 0, 0, tree->right);
+}
+
+/*          Before                             After
+ *          30                                20
+ *         /  \                              /  \
+ *       20    40                         NULL   30
+ *                                               / \
+ *                                            NULL 40
+ */
+void test_rightRotate_given_tree3_should_rotate_as_expect(void)
+{
+  Node *tree = treeBuild(3, 30, 40, 20);
+  tree = rightRotate(tree);
+
+  TEST_ASSERT_EQUAL_TREE(0, 20, 0, 30, tree);
+  TEST_ASSERT_EQUAL_TREE(0, 30, 0, 40, tree->right);
+  TEST_ASSERT_EQUAL_TREE(0, 40, 0, 0, tree->right->right);
+}
+
+/*          Before                             After
+ *           30                                  20
+ *         /   \                               /    \
+ *       20     40                           10      30
+ *      / \    / \                         /  \    /   \
+ *    10  25  35  50                      3   18  25   40
+ *   / \  / \                                    / \   / \
+ *  3  18 23 28                                 23  28 35 50
+ */
+void test_rightRotate_given_tree4A_should_rotate_as_expect(void)
+{
+  Node *tree = treeBuild(11, 30, 20, 10, 3, 18, 25, 23, 28, 40, 35, 50);
+  tree = rightRotate(tree);
+
+  TEST_ASSERT_EQUAL_TREE(0, 20, 10, 30, tree);
+  TEST_ASSERT_EQUAL_TREE(0, 10, 3, 18, tree->left);
+  TEST_ASSERT_EQUAL_TREE(0, 3, 0, 0, tree->left->left);
+  TEST_ASSERT_EQUAL_TREE(0, 18, 0, 0, tree->left->right);
+  TEST_ASSERT_EQUAL_TREE(0, 30, 25, 40, tree->right);
+  TEST_ASSERT_EQUAL_TREE(0, 25, 23, 28, tree->right->left);
+  TEST_ASSERT_EQUAL_TREE(0, 23, 0, 0, tree->right->left->left);
+  TEST_ASSERT_EQUAL_TREE(0, 28, 0, 0, tree->right->left->right);
+  TEST_ASSERT_EQUAL_TREE(0, 40, 35, 50, tree->right->right);
+  TEST_ASSERT_EQUAL_TREE(0, 35, 0, 0, tree->right->right->left);
+  TEST_ASSERT_EQUAL_TREE(0, 50, 0, 0, tree->right->right->right);
+}
