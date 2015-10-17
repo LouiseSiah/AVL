@@ -15,6 +15,7 @@ struct Node_t
 };
 
 void insertTree(Node **tree, int value);
+Node *setNode(int rootData, Node *leftChild, Node *rightChild);
 Node *treeBuild(int num, ...);
 
 #endif // Node_H

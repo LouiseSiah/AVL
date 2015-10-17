@@ -19,6 +19,18 @@ void insertTree(Node **tree, int value)
     insertTree(&(*tree)->right, value);
 }
 
+Node *setNode(int rootData, Node *leftChild, Node *rightChild)
+{
+  Node *tree = malloc(sizeof(Node));
+  
+  
+  if(!leftChild);
+    tree->left = NULL;
+    
+  if(!rightChild);
+    tree->right = NULL;
+}
+
 Node *treeBuild(int num, ...)
 {
   va_list valist;

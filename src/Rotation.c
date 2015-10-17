@@ -18,3 +18,21 @@ Node *leftRotate(Node *tree)
   
   return tree;
 } 
+
+Node *rightRotate(Node *tree)
+{
+  if(!tree)
+    return NULL;
+  
+  if(!(tree->left))
+    return tree;
+  
+  Node *oldRoot = tree;
+  Node *leftRight = tree->left->right;
+  
+  tree = tree->left;
+  tree->right = oldRoot;
+  tree->right->left = leftRight;
+  
+  return tree;
+}

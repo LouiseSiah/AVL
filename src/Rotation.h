@@ -3,5 +3,6 @@
 #include "Node.h"
 
 Node *leftRotate(Node *tree);
+Node *rightRotate(Node *tree);
 
 #endif // Rotation_H

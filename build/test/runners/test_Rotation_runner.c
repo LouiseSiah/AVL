@@ -34,6 +34,7 @@ extern void test_leftRotate_given_NULL_tree_should_return_NULL(void);
 extern void test_leftRotate_given_tree1_should_not_rotate(void);
 extern void test_leftRotate_given_tree2_should_rotate_as_expect(void);
 extern void test_leftRotate_given_tree3_should_rotate_as_expect(void);
+extern void test_leftRotate_given_tree4_should_rotate_as_expect(void);
 
 
 //=======Test Reset Option=====
@@ -49,10 +50,11 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_Rotation.c");
-  RUN_TEST(test_leftRotate_given_NULL_tree_should_return_NULL, 10);
-  RUN_TEST(test_leftRotate_given_tree1_should_not_rotate, 17);
-  RUN_TEST(test_leftRotate_given_tree2_should_rotate_as_expect, 27);
-  RUN_TEST(test_leftRotate_given_tree3_should_rotate_as_expect, 38);
+  RUN_TEST(test_leftRotate_given_NULL_tree_should_return_NULL, 11);
+  RUN_TEST(test_leftRotate_given_tree1_should_not_rotate, 23);
+  RUN_TEST(test_leftRotate_given_tree2_should_rotate_as_expect, 36);
+  RUN_TEST(test_leftRotate_given_tree3_should_rotate_as_expect, 52);
+  RUN_TEST(test_leftRotate_given_tree4_should_rotate_as_expect, 72);
 
   return (UnityEnd());
 }
