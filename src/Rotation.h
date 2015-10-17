@@ -4,6 +4,7 @@
 
 Node *leftRotate(Node *tree);
 Node *rightRotate(Node *tree);
-Node *doubleRotateRightLeft(Node *tree);
+Node *leftRightRotate(Node *tree);
+Node *rightLeftRotate(Node *tree);
 
 #endif // Rotation_H

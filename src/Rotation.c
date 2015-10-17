@@ -37,7 +37,7 @@ Node *rightRotate(Node *tree)
   return tree;
 }
 
-Node *doubleRotateRightLeft(Node *tree)
+Node *leftRightRotate(Node *tree)
 {
   if(!tree)
     return NULL;
@@ -54,6 +54,31 @@ Node *doubleRotateRightLeft(Node *tree)
   Node *newRightLeft = tree->right->left->right;
   
   tree = tree->right->left;
+  tree->left = newLeft;
+  tree->right = newRight;
+  tree->left->right = newLeftRight;
+  tree->right->left = newRightLeft;
+  
+  return tree;
+}
+
+Node *rightLeftRotate(Node *tree)
+{
+   if(!tree)
+    return NULL;
+  
+  if(!(tree->left))
+    return tree;
+  
+  if(!(tree->left->right))
+    return tree;
+  
+  Node *newRight = tree;
+  Node *newLeft = tree->left;
+  Node *newLeftRight = tree->left->right->left;
+  Node *newRightLeft = tree->left->right->right;
+  
+  tree = tree->left->right;
   tree->left = newLeft;
   tree->right = newRight;
   tree->left->right = newLeftRight;
