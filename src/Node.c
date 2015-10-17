@@ -1,5 +1,16 @@
 #include "Node.h"
 
+void setNode(int balanceFactor, int data, Node *leftChild, Node *rightChild, Node **root)
+{
+  if(!(*root))
+    *root = (Node *)malloc(sizeof(Node));
+  
+  (*root)->balanceFactor = balanceFactor;
+  (*root)->data = data;
+  (*root)->left = leftChild;
+  (*root)->right = rightChild;
+}
+
 void insertTree(Node **tree, int value)
 {
   Node *temp = NULL;
@@ -17,18 +28,6 @@ void insertTree(Node **tree, int value)
     insertTree(&(*tree)->left, value);
   else
     insertTree(&(*tree)->right, value);
-}
-
-Node *setNode(int rootData, Node *leftChild, Node *rightChild)
-{
-  Node *tree = malloc(sizeof(Node));
-  
-  
-  if(!leftChild);
-    tree->left = NULL;
-    
-  if(!rightChild);
-    tree->right = NULL;
 }
 
 Node *treeBuild(int num, ...)

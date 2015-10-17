@@ -6,6 +6,21 @@ void setUp(void){}
 
 void tearDown(void){}
 
+Node *node10 = NULL;
+Node *node20 = NULL;
+Node *node30 = NULL;
+
+// Node *node10 = (Node *)malloc(sizeof(Node));
+// node20 = (Node *)malloc(sizeof(Node));
+// node30 = (Node *)malloc(sizeof(Node));
+
+void test_setNode_given_20_should_return_expected_tree(void)
+{
+  setNode(0, 20, node10, node30, &node20);
+  TEST_ASSERT_EQUAL_TREE(0, 20, 0, 0, node20);
+}
+
+/*
 void test_insertTree_given_9_should_return_expect_tree(void)
 {
   Node *tree = NULL;
@@ -23,7 +38,7 @@ void test_insertTree_given_9_2_should_return_expect_tree(void)
   TEST_ASSERT_EQUAL(9, tree->data);
   TEST_ASSERT_EQUAL(2, tree->left->data);
 }
-/*
+
 void test_treeBuild_given_9_2_10_should_return_expect_tree(void)
 {
   Node *expecTree = NULL;

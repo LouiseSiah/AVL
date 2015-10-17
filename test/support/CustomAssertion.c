@@ -39,7 +39,8 @@ void customTestAssertTree(Node *expectedTree, Node *actualTree, int lineNumber)
 }
 */
 
-void customTestAssertTree(int expectedBF, int expectedRoot, int expectedLeftChild, int expectedRightChild, Node *actualTree, int lineNumber)
+// void customTestAssertTree(int expectedBF, int expectedRoot, int expectedLeftChild, int expectedRightChild, Node *actualTree, int lineNumber)
+void customTestAssertTree(int expectedBF, int expectedRoot, Node *expectedLeftChild, Node *expectedRightChild, Node *actualTree, int lineNumber)
 {
   if((!expectedRoot) && (actualTree))
     CUSTOM_TEST_FAIL(lineNumber, "Expected the tree was NULL but NOT." );
@@ -56,8 +57,8 @@ void customTestAssertTree(int expectedBF, int expectedRoot, int expectedLeftChil
   if((expectedLeftChild) && (!actualTree->left))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Left Child was '%d' but actual was NULL", expectedLeftChild);
 
-  if((expectedLeftChild) && (actualTree->left) && (expectedLeftChild != actualTree->left->data))
-    CUSTOM_TEST_FAIL(lineNumber, "Expected Left Child was '%d' but actual was '%d'.", expectedLeftChild, actualTree->left->data);
+  if((expectedLeftChild) && (actualTree->left) && (expectedLeftChild->data != actualTree->left->data))
+    CUSTOM_TEST_FAIL(lineNumber, "Expected Left Child was '%d' but actual was '%d'.", expectedLeftChild->data, actualTree->left->data);
   
   if((!expectedRightChild) && (actualTree->right))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was NULL but actual was '%d'.", actualTree->right->data);
@@ -65,8 +66,8 @@ void customTestAssertTree(int expectedBF, int expectedRoot, int expectedLeftChil
   if((expectedRightChild) && (!actualTree->right))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was '%d' but actual was NULL", expectedRightChild);
   
-  if((expectedRightChild) && (actualTree->right) && (expectedRightChild != actualTree->right->data))
-    CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was '%d' but actual was '%d'.", expectedRightChild, actualTree->right->data);
+  if((expectedRightChild) && (actualTree->right) && (expectedRightChild->data != actualTree->right->data))
+    CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was '%d' but actual was '%d'.", expectedRightChild->data, actualTree->right->data);
   
   if(expectedBF != actualTree->balanceFactor)
     CUSTOM_TEST_FAIL(lineNumber, "Expected balance factor '%d' but actual was '%d'.", expectedBF, actualTree->balanceFactor);

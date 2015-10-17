@@ -15,6 +15,6 @@
 #define TEST_ASSERT_EQUAL_TREE(expectedBF, expectedRoot, expectedLeftChild, expectedRightChild, actualTree);  \
          customTestAssertTree(expectedBF, expectedRoot, expectedLeftChild, expectedRightChild, actualTree, __LINE__);
 
-void customTestAssertTree(int expectedBF, int expectedRoot, int expectedLeftChild, int expectedRightChild, Node *actualTree, int lineNumber);
+void customTestAssertTree(int expectedBF, int expectedRoot, Node *expectedLeftChild, Node *expectedRightChild, Node *actualTree, int lineNumber);
 
 #endif // CustomAssertion_H
