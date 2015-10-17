@@ -15,7 +15,5 @@ struct Node_t
 };
 
 void setNode(int balanceFactor, int data, Node *leftChild, Node *rightChild, Node **root);
-void insertTree(Node **tree, int value);
-Node *treeBuild(int num, ...);
 
 #endif // Node_H

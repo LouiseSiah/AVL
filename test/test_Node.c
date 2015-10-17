@@ -9,62 +9,47 @@ void tearDown(void){}
 Node *node10 = NULL;
 Node *node20 = NULL;
 Node *node30 = NULL;
+Node *node40 = NULL;
 
-// Node *node10 = (Node *)malloc(sizeof(Node));
-// node20 = (Node *)malloc(sizeof(Node));
-// node30 = (Node *)malloc(sizeof(Node));
-
-void test_setNode_given_20_should_return_expected_tree(void)
+/*
+ *          node20(20)
+ *         /      \
+ * node10(NULL) node30(NULL)
+ */
+void test_setNode_given_20_node20_as_root_should_return_expected_tree(void)
 {
   setNode(0, 20, node10, node30, &node20);
-  TEST_ASSERT_EQUAL_TREE(0, 20, 0, 0, node20);
+  TEST_ASSERT_EQUAL_TREE(0, 20, node10, node30, node20);
 }
 
 /*
-void test_insertTree_given_9_should_return_expect_tree(void)
+ *          node20(20)
+ *         /      \
+ * node10(10) node30(30)
+ */
+void test_setNode_given_10_20_30_node20_as_root_should_return_expected_tree(void)
 {
-  Node *tree = NULL;
-  insertTree(&tree, 9);
-  TEST_ASSERT_EQUAL_TREE(0, 9, 0, 0, tree);
+  setNode(0, 10, NULL, NULL, &node10);
+  setNode(0, 30, NULL, NULL, &node30);
+  setNode(0, 20, node10, node30, &node20);
+  TEST_ASSERT_EQUAL_TREE(0, 20, node10, node30, node20);
 }
 
-void test_insertTree_given_9_2_should_return_expect_tree(void)
+/*
+ *               node30(30)
+ *               /      \
+ *      node20(20)    node40(40)
+ *          /
+ *  node10(10)
+ */
+void test_setNode_given_10_20_30_40_node30_as_root_should_return_expected_tree(void)
 {
-  Node *tree = NULL;
-  insertTree(&tree, 9);
-  insertTree(&tree, 2);
-  TEST_ASSERT_NOT_NULL(tree);
-  TEST_ASSERT_NULL(tree->right);
-  TEST_ASSERT_EQUAL(9, tree->data);
-  TEST_ASSERT_EQUAL(2, tree->left->data);
+  setNode(0, 10, NULL, NULL, &node10);
+  setNode(0, 20, node10, NULL, &node20);
+  setNode(0, 40, NULL, NULL, &node40);
+  setNode(0, 30, node20, node40, &node30);
+  TEST_ASSERT_EQUAL_TREE(0, 30, node20, node40, node30);
+  TEST_ASSERT_EQUAL_TREE(0, 20, node10, NULL, node20);
+  TEST_ASSERT_EQUAL_TREE(0, 10, NULL, NULL, node10);
+  TEST_ASSERT_EQUAL_TREE(0, 40, NULL, NULL, node40);
 }
-
-void test_treeBuild_given_9_2_10_should_return_expect_tree(void)
-{
-  Node *expecTree = NULL;
-  Node *tree = treeBuild(3, 9, 2, 10);
-  insertTree(&expecTree, 9);
-  insertTree(&expecTree, 2);
-  insertTree(&expecTree, 10);
-  TEST_ASSERT_NOT_NULL(tree);
-  TEST_ASSERT_NOT_NULL(expecTree);
-  TEST_ASSERT_EQUAL_TREE(expecTree, tree);
-}
-
-void test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree(void)
-{
-  Node *expecTree = NULL;
-  Node *tree = treeBuild(8, 9, 2, 10, 13, 1, 6, 7, 8);
-  insertTree(&expecTree, 9);
-  insertTree(&expecTree, 2);
-  insertTree(&expecTree, 10);
-  insertTree(&expecTree, 13);
-  insertTree(&expecTree, 1);
-  insertTree(&expecTree, 6);
-  insertTree(&expecTree, 7);
-  insertTree(&expecTree, 8);
-  TEST_ASSERT_NOT_NULL(tree);
-  TEST_ASSERT_NOT_NULL(expecTree);
-  // TEST_ASSERT_EQUAL_TREE(expecTree, tree);
-}
-*/
