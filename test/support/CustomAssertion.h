@@ -2,7 +2,6 @@
 #define CustomAssertion_H
 #include "unity.h"
 #include "Node.h"
-// #include <assert.h>
 
 // ... can represent any arguement.
 #define CUSTOM_TEST_FAIL(lineNo, msg, ...)                                                        \

@@ -2,14 +2,14 @@
 #include "Node.h"
 #include "CustomAssertion.h"
 
-void setUp(void){}
-
-void tearDown(void){}
-
 Node *node10 = NULL;
 Node *node20 = NULL;
 Node *node30 = NULL;
 Node *node40 = NULL;
+
+void setUp(void){}
+
+void tearDown(void){}
 
 /*
  *          node20(20)

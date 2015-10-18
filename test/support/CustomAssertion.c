@@ -51,20 +51,32 @@ void customTestAssertTree(int expectedBF, int expectedRoot, Node *expectedLeftCh
   if(expectedRoot != actualTree->data)
     CUSTOM_TEST_FAIL(lineNumber, "Expected the Root was '%d' but actual was '%d'.", expectedRoot, actualTree->data);
   
+//******************************************Left Child***********************************************************************
+
   if((!expectedLeftChild) && (actualTree->left))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Left Child was NULL but actual was '%d'.", actualTree->left->data);
 
   if((expectedLeftChild) && (!actualTree->left))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Left Child was '%d' but actual was NULL", expectedLeftChild->data);
 
+  if((expectedLeftChild) && (actualTree->left) && (expectedLeftChild != actualTree->left))
+    CUSTOM_TEST_FAIL(lineNumber, "Expected Left Node was not same as actual Left Node");
+
   if((expectedLeftChild) && (actualTree->left) && (expectedLeftChild->data != actualTree->left->data))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Left Child was '%d' but actual was '%d'.", expectedLeftChild->data, actualTree->left->data);
+
+
   
-  if((!expectedRightChild) && (actualTree->right))
+//******************************************Right Child***********************************************************************
+ 
+ if((!expectedRightChild) && (actualTree->right))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was NULL but actual was '%d'.", actualTree->right->data);
 
   if((expectedRightChild) && (!actualTree->right))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was '%d' but actual was NULL", expectedRightChild->data);
+  
+  if((expectedRightChild) && (actualTree->right) && (expectedRightChild != actualTree->right))
+    CUSTOM_TEST_FAIL(lineNumber, "Expected Right Node was not same as actual Right Node");
   
   if((expectedRightChild) && (actualTree->right) && (expectedRightChild->data != actualTree->right->data))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was '%d' but actual was '%d'.", expectedRightChild->data, actualTree->right->data);
