@@ -1,13 +1,15 @@
 #include "Rotation.h"
 #include <stdlib.h>
+#include "CException.h"
+#include "ErrorObject.h"
 
 Node *leftRotate(Node *tree)
 {
   if(!tree)
-    return NULL;
+   throwError("Hey!The tree is NULL, nothing to rotate.", TREE_IS_NULL);
   
   if(!(tree->right))
-    return tree;
+    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
   
   Node *oldRoot = tree;
   Node *rightLeft = tree->right->left;
@@ -22,10 +24,10 @@ Node *leftRotate(Node *tree)
 Node *rightRotate(Node *tree)
 {
   if(!tree)
-    return NULL;
+    throwError("Hey!The tree is NULL, nothing to rotate.", TREE_IS_NULL);
   
   if(!(tree->left))
-    return tree;
+    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
   
   Node *oldRoot = tree;
   Node *leftRight = tree->left->right;
@@ -40,13 +42,13 @@ Node *rightRotate(Node *tree)
 Node *leftRightRotate(Node *tree)
 {
    if(!tree)
-    return NULL;
+    throwError("Hey!The tree is NULL, nothing to rotate.", TREE_IS_NULL);
   
   if(!(tree->left))
-    return tree;
+    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
   
   if(!(tree->left->right))
-    return tree;
+    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
   
   Node *newRight = tree;
   Node *newLeft = tree->left;
@@ -65,13 +67,13 @@ Node *leftRightRotate(Node *tree)
 Node *rightLeftRotate(Node *tree)
 {
   if(!tree)
-    return NULL;
+    throwError("Hey!The tree is NULL, nothing to rotate.", TREE_IS_NULL);
   
   if(!(tree->right))
-    return tree;
+    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
   
   if(!(tree->right->left))
-    return tree;
+    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
   
   Node *newLeft = tree;
   Node *newRight = tree->right;

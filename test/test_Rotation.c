@@ -2,7 +2,8 @@
 #include "Rotation.h"
 #include "CustomAssertion.h"
 #include "Node.h"
-
+#include "ErrorObject.h"
+#include "CException.h"
 Node *node10 = NULL;
 Node *node20 = NULL;
 Node *node30 = NULL;
@@ -16,11 +17,22 @@ void setUp(void){}
 void tearDown(void){}
 
 // throw error?
-void test_leftRotate_given_NULL_tree_should_return_NULL(void)
+void test_leftRotate_given_NULL_tree_should_catch_the_error(void)
 {
   node30 = NULL;
-  Node *tree = leftRotate(node30);
-  TEST_ASSERT_NULL(tree);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = leftRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+
+    freeError(err);
+  }
 }
 
 /*          Before               After
@@ -28,12 +40,23 @@ void test_leftRotate_given_NULL_tree_should_return_NULL(void)
  *         /  \                  /  \
  *     node20 NULL         node20 NULL
  */
-void test_leftRotate_given_tree1_should_not_rotate(void)
+void test_leftRotate_given_tree1_should_catch_the_error(void)
 {
   setNode(0, 20, NULL, NULL, &node20);
   setNode(0, 30, node20, NULL, &node30);
-  Node *tree = leftRotate(node30);
-  TEST_ASSERT_EQUAL_TREE(0, 30, node20, NULL, tree);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = leftRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey! There is no Child to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(NO_CHILD_TO_ROTATE, err->errorCode);
+
+    freeError(err);
+  }
 }
 
 /*          Before                             After
@@ -57,11 +80,22 @@ void test_leftRotate_given_tree2_should_rotate_as_expect(void)
   TEST_ASSERT_EQUAL_TREE(0, 20, node10, node30, tree->left);
 }
 
-void test_rightRotate_given_NULL_tree_should_return_NULL(void)
+void test_rightRotate_given_NULL_tree_should_catch_the_error(void)
 {
   node30 = NULL;
-  Node *tree  = rightRotate(node30);
-  TEST_ASSERT_NULL(tree);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = rightRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+
+    freeError(err);
+  }
 }
 
 /*          Before               After
@@ -69,12 +103,23 @@ void test_rightRotate_given_NULL_tree_should_return_NULL(void)
  *         /  \                  /  \
  *      NULL  node20        NULL  node20
  */
-void test_rightRotate_given_tree1_should_not_rotate(void)
+void test_rightRotate_given_tree1_should_catch_the_error(void)
 {
   setNode(0, 20, NULL, NULL, &node20);
   setNode(0, 30, NULL, node20, &node30);
-  Node *tree = rightRotate(node30);
-  TEST_ASSERT_EQUAL_TREE(0, 30, NULL, node20, tree);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = rightRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey! There is no Child to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(NO_CHILD_TO_ROTATE, err->errorCode);
+
+    freeError(err);
+  }
 }
 
 /*          Before                             After
@@ -98,11 +143,46 @@ void test_rightRotate_given_tree2R_should_rotate_as_expect(void)
   TEST_ASSERT_EQUAL_TREE(0, 40, node30, node50, tree->right);
 }
 
-void test_leftRightRotate_given_NULL_tree_should_return_NULL(void)
+void test_leftRightRotate_given_NULL_tree_should_catch_the_error(void)
 {
   node30 = NULL;
-  Node *tree  = leftRightRotate(node30);
-  TEST_ASSERT_NULL(tree);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = leftRightRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+    
+    freeError(err);
+  }
+}
+
+/*          Before               After
+ *          30                    30
+ *         /  \                  /  \
+ *     NULL NULL             NULL   NULL  
+ */
+void test_leftRightRotate_given_tree1A_should_catch_the_error(void)
+{
+  setNode(0, 30, NULL, NULL, &node30);
+  
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = leftRightRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey! There is no Child to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(NO_CHILD_TO_ROTATE, err->errorCode);
+
+    freeError(err);
+  }
 }
 
 /*          Before               After
@@ -110,12 +190,24 @@ void test_leftRightRotate_given_NULL_tree_should_return_NULL(void)
  *         /  \                  /  \
  *     node20 NULL        node20    NULL  
  */
-void test_leftRightRotate_given_tree1_should_not_rotate(void)
+void test_leftRightRotate_given_tree1_should_catch_the_error(void)
 {
   setNode(0, 20, NULL, NULL, &node20);
   setNode(0, 30, node20, NULL, &node30);
-  Node *tree = leftRightRotate(node30);
-  TEST_ASSERT_EQUAL_TREE(0, 30, node20, NULL, tree);
+  
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = leftRightRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey! There is no Child to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(NO_CHILD_TO_ROTATE, err->errorCode);
+
+    freeError(err);
+  }
 }
 
 /*          Before                             After
@@ -144,12 +236,47 @@ void test_leftRightRotate_given_tree2LR_should_rotate_as_expect(void)
   TEST_ASSERT_EQUAL_TREE(0, 60, node50, node70, tree->right);
 }
 
-void test_rightLeftRotate_given_NULL_tree_should_return_NULL(void)
+void test_rightLeftRotate_given_NULL_tree_should_catch_the_error(void)
 {
   node30 = NULL;
-  Node *tree = rightLeftRotate(node30);
-  TEST_ASSERT_NULL(tree);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = rightLeftRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+    
+    freeError(err);
+  }
 }
+
+/*          Before               After
+ *          30                    30
+ *         /  \                  /  \
+ *      NULL  NULL            NULL  NULL
+ */
+void test_rightLeftRotate_given_tree1A_should_not_rotate(void)
+{
+  setNode(0, 30, NULL, NULL, &node30);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = rightLeftRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey! There is no Child to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(NO_CHILD_TO_ROTATE, err->errorCode);
+
+    freeError(err);
+  }
+}
+
 
 /*          Before               After
  *          30                    30
@@ -160,8 +287,19 @@ void test_rightLeftRotate_given_tree1_should_not_rotate(void)
 {
   setNode(0, 20, NULL, NULL, &node20);
   setNode(0, 30, NULL, node20, &node30);
-  Node *tree = rightLeftRotate(node30);
-  TEST_ASSERT_EQUAL_TREE(0, 30, NULL, node20, tree);
+  ErrorObject *err;
+  Try
+  {
+    Node *tree = rightLeftRotate(node30);
+    TEST_FAIL_MESSAGE("Expected to catch Error here, but didn't.\n");
+  }
+  Catch(err)
+  {
+    TEST_ASSERT_EQUAL_STRING("Hey! There is no Child to rotate.", err->errorMsg);
+    TEST_ASSERT_EQUAL(NO_CHILD_TO_ROTATE, err->errorCode);
+
+    freeError(err);
+  }
 }
 
 /*          Before                             After
