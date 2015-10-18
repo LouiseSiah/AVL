@@ -4,7 +4,7 @@
 
 typedef enum
 {
-  TREE_IS_NULL,
+  TREE_IS_EMPTY,
   NO_CHILD_TO_ROTATE,
 } ErrorCode;
 

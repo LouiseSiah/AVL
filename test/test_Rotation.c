@@ -16,7 +16,6 @@ void setUp(void){}
 
 void tearDown(void){}
 
-// throw error?
 void test_leftRotate_given_NULL_tree_should_catch_the_error(void)
 {
   node30 = NULL;
@@ -29,7 +28,7 @@ void test_leftRotate_given_NULL_tree_should_catch_the_error(void)
   Catch(err)
   {
     TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
-    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+    TEST_ASSERT_EQUAL(TREE_IS_EMPTY, err->errorCode);
 
     freeError(err);
   }
@@ -92,7 +91,7 @@ void test_rightRotate_given_NULL_tree_should_catch_the_error(void)
   Catch(err)
   {
     TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
-    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+    TEST_ASSERT_EQUAL(TREE_IS_EMPTY, err->errorCode);
 
     freeError(err);
   }
@@ -155,7 +154,7 @@ void test_leftRightRotate_given_NULL_tree_should_catch_the_error(void)
   Catch(err)
   {
     TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
-    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+    TEST_ASSERT_EQUAL(TREE_IS_EMPTY, err->errorCode);
     
     freeError(err);
   }
@@ -248,7 +247,7 @@ void test_rightLeftRotate_given_NULL_tree_should_catch_the_error(void)
   Catch(err)
   {
     TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
-    TEST_ASSERT_EQUAL(TREE_IS_NULL, err->errorCode);
+    TEST_ASSERT_EQUAL(TREE_IS_EMPTY, err->errorCode);
     
     freeError(err);
   }
