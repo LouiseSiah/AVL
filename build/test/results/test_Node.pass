@@ -3,20 +3,23 @@
   :path: test
   :file: test_Node.c
 :successes:
-- :test: test_insertTree_insert_9_should_give_one_node_tree_only
+- :test: test_insertTree_given_9_should_return_expect_tree
   :line: 9
   :message: ''
-- :test: test_insertTree_insert_9_2_should_give_expected_tree
+- :test: test_insertTree_given_9_2_should_return_expect_tree
   :line: 19
   :message: ''
-- :test: test_treeBuild_insert_9_2_10_should_return_expect_tree
+- :test: test_treeBuild_given_9_2_10_should_return_expect_tree
   :line: 30
+  :message: ''
+- :test: test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree
+  :line: 42
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 3
-  :passed: 3
+  :total: 4
+  :passed: 4
   :failed: 0
   :ignored: 0
 :stdout:

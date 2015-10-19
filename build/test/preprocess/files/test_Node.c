@@ -11,7 +11,7 @@ void tearDown(void){}
 
 
 
-void test_insertTree_insert_9_should_give_one_node_tree_only(void)
+void test_insertTree_given_9_should_return_expect_tree(void)
 
 {
 
@@ -31,7 +31,7 @@ void test_insertTree_insert_9_should_give_one_node_tree_only(void)
 
 
 
-void test_insertTree_insert_9_2_should_give_expected_tree(void)
+void test_insertTree_given_9_2_should_return_expect_tree(void)
 
 {
 
@@ -53,30 +53,58 @@ void test_insertTree_insert_9_2_should_give_expected_tree(void)
 
 
 
-void test_treeBuild_insert_9_2_10_should_return_expect_tree(void)
+void test_treeBuild_given_9_2_10_should_return_expect_tree(void)
 
 {
 
+  Node *expecTree = ((void *)0);
+
   Node *tree = treeBuild(3, 9, 2, 10);
 
-  Node *expec = treeBuild(3, 9, 2, 10);
+  insertTree(&expecTree, 9);
 
-  if ((((tree)) != ((void *)0))) {} else {UnityFail( (" Expected Non-NULL"), (_U_UINT)(_U_UINT)(_U_UINT)34);;};
+  insertTree(&expecTree, 2);
 
-  if ((((expec)) != ((void *)0))) {} else {UnityFail( (" Expected Non-NULL"), (_U_UINT)(_U_UINT)(_U_UINT)35);;};
+  insertTree(&expecTree, 10);
 
+  if ((((tree)) != ((void *)0))) {} else {UnityFail( (" Expected Non-NULL"), (_U_UINT)(_U_UINT)(_U_UINT)37);;};
 
-
-
-
-  UnityAssertEqualNumber((_U_SINT)((9)), (_U_SINT)((tree->data)), (((void *)0)), (_U_UINT)38, UNITY_DISPLAY_STYLE_INT);
-
-  UnityAssertEqualNumber((_U_SINT)((2)), (_U_SINT)((tree->left->data)), (((void *)0)), (_U_UINT)39, UNITY_DISPLAY_STYLE_INT);
-
-  UnityAssertEqualNumber((_U_SINT)((10)), (_U_SINT)((tree->right->data)), (((void *)0)), (_U_UINT)40, UNITY_DISPLAY_STYLE_INT);
+  if ((((expecTree)) != ((void *)0))) {} else {UnityFail( (" Expected Non-NULL"), (_U_UINT)(_U_UINT)(_U_UINT)38);;};
 
 
 
-  ; customTestAssertTree(expec, tree, 42);;
+}
+
+
+
+void test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree(void)
+
+{
+
+  Node *expecTree = ((void *)0);
+
+  Node *tree = treeBuild(8, 9, 2, 10, 13, 1, 6, 7, 8);
+
+  insertTree(&expecTree, 9);
+
+  insertTree(&expecTree, 2);
+
+  insertTree(&expecTree, 10);
+
+  insertTree(&expecTree, 13);
+
+  insertTree(&expecTree, 1);
+
+  insertTree(&expecTree, 6);
+
+  insertTree(&expecTree, 7);
+
+  insertTree(&expecTree, 8);
+
+  if ((((tree)) != ((void *)0))) {} else {UnityFail( (" Expected Non-NULL"), (_U_UINT)(_U_UINT)(_U_UINT)54);;};
+
+  if ((((expecTree)) != ((void *)0))) {} else {UnityFail( (" Expected Non-NULL"), (_U_UINT)(_U_UINT)(_U_UINT)55);;};
+
+
 
 }

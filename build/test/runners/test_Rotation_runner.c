@@ -30,7 +30,10 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_module_generator_needs_to_be_implemented(void);
+extern void test_leftRotate_given_NULL_tree_should_return_NULL(void);
+extern void test_leftRotate_given_tree1_should_not_rotate(void);
+extern void test_leftRotate_given_tree2_should_rotate_as_expect(void);
+extern void test_leftRotate_given_tree3_should_rotate_as_expect(void);
 
 
 //=======Test Reset Option=====
@@ -46,7 +49,10 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_Rotation.c");
-  RUN_TEST(test_module_generator_needs_to_be_implemented, 8);
+  RUN_TEST(test_leftRotate_given_NULL_tree_should_return_NULL, 10);
+  RUN_TEST(test_leftRotate_given_tree1_should_not_rotate, 17);
+  RUN_TEST(test_leftRotate_given_tree2_should_rotate_as_expect, 27);
+  RUN_TEST(test_leftRotate_given_tree3_should_rotate_as_expect, 38);
 
   return (UnityEnd());
 }

@@ -2,16 +2,25 @@
 :source:
   :path: test
   :file: test_Rotation.c
-:successes: []
-:failures: []
-:ignores:
-- :test: test_module_generator_needs_to_be_implemented
+:successes:
+- :test: test_leftRotate_given_NULL_tree_should_return_NULL
   :line: 10
-  :message: Implement me!
+  :message: ''
+- :test: test_leftRotate_given_tree1_should_not_rotate
+  :line: 17
+  :message: ''
+- :test: test_leftRotate_given_tree2_should_rotate_as_expect
+  :line: 27
+  :message: ''
+- :test: test_leftRotate_given_tree3_should_rotate_as_expect
+  :line: 38
+  :message: ''
+:failures: []
+:ignores: []
 :counts:
-  :total: 1
-  :passed: 0
+  :total: 4
+  :passed: 4
   :failed: 0
-  :ignored: 1
+  :ignored: 0
 :stdout:
 - ''

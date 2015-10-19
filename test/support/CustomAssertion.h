@@ -12,9 +12,9 @@
                   UNITY_TEST_FAIL(lineNo, buffer);                                                 \
                 }
 
-#define TEST_ASSERT_EQUAL_TREE(expectedTree, actualTree);                           \
+// #define TEST_ASSERT_EQUAL_TREE(expectedTree, actualTree);                           \
               customTestAssertTree(expectedTree, actualTree, __LINE__);
 
-void customTestAssertTree(Node *expectedTree, Node *actualTree, int lineNumber);
+void customTestAssertTree(int balanceFactorExpec, Node *expectedRoot, Node *expectedLeftChild, Node *expectedRightChild, Node *actualTree, int lineNumber);
 
 #endif // CustomAssertion_H

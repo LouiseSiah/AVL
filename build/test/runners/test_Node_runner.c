@@ -30,9 +30,10 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_insertTree_insert_9_should_give_one_node_tree_only(void);
-extern void test_insertTree_insert_9_2_should_give_expected_tree(void);
-extern void test_treeBuild_insert_9_2_10_should_return_expect_tree(void);
+extern void test_insertTree_given_9_should_return_expect_tree(void);
+extern void test_insertTree_given_9_2_should_return_expect_tree(void);
+extern void test_treeBuild_given_9_2_10_should_return_expect_tree(void);
+extern void test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree(void);
 
 
 //=======Test Reset Option=====
@@ -48,9 +49,10 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_Node.c");
-  RUN_TEST(test_insertTree_insert_9_should_give_one_node_tree_only, 9);
-  RUN_TEST(test_insertTree_insert_9_2_should_give_expected_tree, 19);
-  RUN_TEST(test_treeBuild_insert_9_2_10_should_return_expect_tree, 30);
+  RUN_TEST(test_insertTree_given_9_should_return_expect_tree, 9);
+  RUN_TEST(test_insertTree_given_9_2_should_return_expect_tree, 19);
+  RUN_TEST(test_treeBuild_given_9_2_10_should_return_expect_tree, 30);
+  RUN_TEST(test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree, 42);
 
   return (UnityEnd());
 }

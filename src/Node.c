@@ -7,7 +7,7 @@ void insertTree(Node **tree, int value)
   {
     temp = (Node *)malloc(sizeof(Node));
     temp->left = temp->right = NULL;
-    temp->weight = 0;
+    temp->balanceFactor = 0;
     temp->data = value;
     *tree = temp;
     return;
