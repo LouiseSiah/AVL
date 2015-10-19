@@ -32,8 +32,6 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_insertTree_given_9_should_return_expect_tree(void);
 extern void test_insertTree_given_9_2_should_return_expect_tree(void);
-extern void test_treeBuild_given_9_2_10_should_return_expect_tree(void);
-extern void test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree(void);
 
 
 //=======Test Reset Option=====
@@ -50,9 +48,7 @@ int main(void)
 {
   UnityBegin("test_Node.c");
   RUN_TEST(test_insertTree_given_9_should_return_expect_tree, 9);
-  RUN_TEST(test_insertTree_given_9_2_should_return_expect_tree, 19);
-  RUN_TEST(test_treeBuild_given_9_2_10_should_return_expect_tree, 30);
-  RUN_TEST(test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree, 42);
+  RUN_TEST(test_insertTree_given_9_2_should_return_expect_tree, 16);
 
   return (UnityEnd());
 }

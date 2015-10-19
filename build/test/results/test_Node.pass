@@ -7,19 +7,13 @@
   :line: 9
   :message: ''
 - :test: test_insertTree_given_9_2_should_return_expect_tree
-  :line: 19
-  :message: ''
-- :test: test_treeBuild_given_9_2_10_should_return_expect_tree
-  :line: 30
-  :message: ''
-- :test: test_treeBuild_given_9_2_10_13_1_6_7_8_should_return_expect_tree
-  :line: 42
+  :line: 16
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 4
-  :passed: 4
+  :total: 2
+  :passed: 2
   :failed: 0
   :ignored: 0
 :stdout:
