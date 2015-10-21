@@ -59,7 +59,7 @@ void customTestAssertTree(int expectedBF, int expectedRoot, Node *expectedLeftCh
   if((expectedLeftChild) && (!actualTree->left))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Left Child was '%d' but actual was NULL", expectedLeftChild->data);
 
-  if((expectedLeftChild) && (actualTree->left) && (expectedLeftChild != actualTree->left))
+  if((expectedLeftChild) && (actualTree->left) && ((expectedLeftChild) != (actualTree->left)))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Left Node was not same as actual Left Node");
 
   if((expectedLeftChild) && (actualTree->left) && (expectedLeftChild->data != actualTree->left->data))
@@ -75,7 +75,7 @@ void customTestAssertTree(int expectedBF, int expectedRoot, Node *expectedLeftCh
   if((expectedRightChild) && (!actualTree->right))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Right Child was '%d' but actual was NULL", expectedRightChild->data);
   
-  if((expectedRightChild) && (actualTree->right) && (expectedRightChild != actualTree->right))
+  if((expectedRightChild) && (actualTree->right) && ((expectedRightChild) != (actualTree->right)))
     CUSTOM_TEST_FAIL(lineNumber, "Expected Right Node was not same as actual Right Node");
   
   if((expectedRightChild) && (actualTree->right) && (expectedRightChild->data != actualTree->right->data))
