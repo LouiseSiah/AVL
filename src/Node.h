@@ -15,5 +15,6 @@ struct Node_t
 };
 
 void setNode(int balanceFactor, int data, Node *leftChild, Node *rightChild, Node **root);
+void setNodeF(int balanceFactor, int data, Node *leftChild, Node *rightChild, Node **root);
 
 #endif // Node_H
