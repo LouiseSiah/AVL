@@ -3,29 +3,49 @@
 int avlAdd(Node **rootPtr, Node *newNode)
 {
   // Node *temp = NULL;
-  // int beforeBF = (*rootPtr)->balanceFactor;
-  int balanceFactor = 1;// = (*rootPtr)->balanceFactor;
-  if(!(*rootPtr))
-  {
-    // (*rootPtr) = (Node *)malloc(sizeof(Node));
-    // (*rootPtr)->left = (*rootPtr)->right = NULL; 
-    (*rootPtr) = newNode;
-    return 0 ;
-  }
+  int valueReturn = 0;
+  
+  // if(!(*rootPtr))
+  // {
+    // // (*rootPtr) = (Node *)malloc(sizeof(Node));
+    // // (*rootPtr)->left = (*rootPtr)->right = NULL; 
+    // (*rootPtr) = newNode;
+    // return 0 ;
+  // }
   
   if(newNode->data < (*rootPtr)->data)
   {
-    (*rootPtr)->balanceFactor--;
-    balanceFactor = avlAdd(&(*rootPtr)->left, newNode);
+    if(!(*rootPtr)->left)
+    {
+      (*rootPtr)->balanceFactor--;
+      (*rootPtr)->left = newNode;
+      if((*rootPtr)->balanceFactor == -1)
+        return 1;
+    }
+    else
+    {
+      (*rootPtr)->balanceFactor--;
+      valueReturn = avlAdd(&(*rootPtr)->left, newNode);
+    }
 
   }
   else
   {
-    (*rootPtr)->balanceFactor++;
-    balanceFactor = avlAdd(&(*rootPtr)->right, newNode);
+    if(!(*rootPtr)->right)
+    {
+      (*rootPtr)->balanceFactor++;
+      (*rootPtr)->right = newNode;
+      if((*rootPtr)->balanceFactor == 1)
+        return 1;
+    }
+    else
+    {
+      (*rootPtr)->balanceFactor++;
+      valueReturn = avlAdd(&(*rootPtr)->right, newNode);
+    }
   }
   
-  if((!balanceFactor) && (((*rootPtr)->balanceFactor) || ((*rootPtr)->balanceFactor == -1)))
+  if(valueReturn)
     return 1;
   else
     return 0;

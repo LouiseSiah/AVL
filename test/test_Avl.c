@@ -86,10 +86,12 @@ void test_avlAddadd_node60_given_node20_should_F()
   setNode(1, 50, NULL, &node60, &node50);
   Node *root;
   root = &node50;
+  // printf("*, %d\n", (root)->balanceFactor);
+
   change = avlAdd(&root, &node20);
   TEST_ASSERT_EQUAL(0, change);
   TEST_ASSERT_EQUAL_TREE(0, 50, &node20, &node60, root);
-  // TEST_ASSERT_EQUAL_TREE(0, 60, NULL, NULL, root->right);
+  TEST_ASSERT_EQUAL_TREE(0, 60, NULL, NULL, root->right);
 }
 
 /**
@@ -105,11 +107,13 @@ void test_avlAddadd_node60_node20_given_node10_should_F()
   setNode(0, 10, NULL, NULL, &node10);
   setNode(0, 20, NULL, NULL, &node20);
   setNode(0, 60, NULL, NULL, &node60);
-  setNode(0, 50, NULL, &node60, &node50);
-  Node *root;
-  root = &node50;
+  setNode(0, 50, &node20, &node60, &node50);
+  Node *root = &node50;
+  
   change = avlAdd(&root, &node10);
   TEST_ASSERT_EQUAL(1, change);
   TEST_ASSERT_EQUAL_TREE(-1, 50, &node20, &node60, root);
-  // TEST_ASSERT_EQUAL_TREE(0, 60, NULL, NULL, root->right);
+  TEST_ASSERT_EQUAL_TREE(-1, 20, &node10, NULL, root->left);
+  TEST_ASSERT_EQUAL_TREE(0, 10, NULL, NULL, root->left->left);
+  TEST_ASSERT_EQUAL_TREE(0, 60, NULL, NULL, root->right);
 }
