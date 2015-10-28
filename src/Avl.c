@@ -1,17 +1,16 @@
 #include "Avl.h"
+#include "CException.h"
+#include "ErrorObject.h"
 
 int avlAdd(Node **rootPtr, Node *newNode)
 {
-  // Node *temp = NULL;
   int valueReturn = 0;
   
-  // if(!(*rootPtr))
-  // {
-    // // (*rootPtr) = (Node *)malloc(sizeof(Node));
-    // // (*rootPtr)->left = (*rootPtr)->right = NULL; 
-    // (*rootPtr) = newNode;
-    // return 0 ;
-  // }
+  if(!newNode)
+    throwError("Hey!The new Node is NULL, cannot add to the tree.", NEWNODE_IS_NULL);
+  
+  if(!(*rootPtr))
+    throwError("Hey!The root is NULL, cannot add newNode to empty tree.", TREE_IS_EMPTY);
   
   if(newNode->data < (*rootPtr)->data)
   {
@@ -19,9 +18,12 @@ int avlAdd(Node **rootPtr, Node *newNode)
     {
       (*rootPtr)->balanceFactor--;
       (*rootPtr)->left = newNode;
+      
       if((*rootPtr)->balanceFactor == -1)
         return 1;
+      
     }
+  
     else
     {
       (*rootPtr)->balanceFactor--;
@@ -29,15 +31,18 @@ int avlAdd(Node **rootPtr, Node *newNode)
     }
 
   }
+  
   else
   {
     if(!(*rootPtr)->right)
     {
       (*rootPtr)->balanceFactor++;
       (*rootPtr)->right = newNode;
+      
       if((*rootPtr)->balanceFactor == 1)
         return 1;
     }
+  
     else
     {
       (*rootPtr)->balanceFactor++;
@@ -45,34 +50,6 @@ int avlAdd(Node **rootPtr, Node *newNode)
     }
   }
   
-  if(valueReturn)
-    return 1;
-  else
-    return 0;
+  return valueReturn;
     
 }
-  // if(!balanceFactor)
-    // return 0;
-  // else
-    // return 1;
-// }
-
-
-// void insertTree(Node **tree, int value)
-// {
-  // Node *temp = NULL;
-  // if(!(*tree))
-  // {
-    // temp = (Node *)malloc(sizeof(Node));
-    // temp->left = temp->right = NULL;
-    // temp->balanceFactor = 0;
-    // temp->data = value;
-    // *tree = temp;
-    // return;
-  // }
-  
-  // if(value < (*tree)->data)
-    // insertTree(&(*tree)->left, value);
-  // else
-    // insertTree(&(*tree)->right, value);
-// }

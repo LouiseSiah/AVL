@@ -6,6 +6,7 @@ typedef enum
 {
   TREE_IS_EMPTY,
   NO_CHILD_TO_ROTATE,
+  NEWNODE_IS_NULL, // for function :int avlAdd(Node **rootPtr, Node *newNode)
 } ErrorCode;
 
 typedef struct
