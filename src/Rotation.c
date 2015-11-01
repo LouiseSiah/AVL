@@ -6,15 +6,18 @@
 /*
  * brief @ Right child of a tree will be rotate with the root as shown as below.
  *            Before                             After
- *            20                                  40
- *          /   \                               /   \
- *         10     40                           20     50
- *               / \                         /  \
- *              30  50                     10   30
+ *            20(+2)                            40(0)
+ *             \                               /   \
+ *            40(+1)                       20(0)  50(0)
+ *                \                    
+ *               50(0)                 
  *
  * brief @ It will throw an Error when the tree is empty or the tree had no right child.
- * param @ tree    - The tree that is going to rotate its right child.
- * retval@ Node *  - The tree that its right child had been rotated.
+ * brief @ The balance factor also will be modified according to the rotation.
+ *
+ * param @ tree    - The tree that is going to rotate its right child, the right child will
+ *                   be the root of the tree after rotation.
+ * retval@ Node *  - The tree that had been rotated.
  */ 
 Node *leftRotate(Node *tree)
 {
@@ -31,21 +34,31 @@ Node *leftRotate(Node *tree)
   tree->left = oldRoot;
   tree->left->right = rightLeft;
   
+  if(tree->balanceFactor)
+    tree->left->balanceFactor-= 2;
+  else
+    tree->left->balanceFactor--;
+  
+  tree->balanceFactor--;
+  
   return tree;
 } 
 
 /*
  * brief @ Left child of a tree will be rotate with the root as shown as below.
- *             Before                             After
- *              40                                  20
- *             /   \                               /    \
- *            20    50                            10     40
- *           / \                                        /   \
- *         10  30                                      30   50
+ *          Before                             After
+ *           50(-2)                           40(0)
+ *           /                               /   \
+ *         40(-1)                        20(0)  50(0)
+ *         /                    
+ *        20(0)                 
  *
  * brief @ It will throw an Error when the tree is empty or the tree had no left child.
- * param @ tree    - The tree that is going to rotate its right child.
- * retval@ Node *  - The tree that its right child had been rotated.
+ * brief @ The balance factor also will be modified according to the rotation.
+ *
+ * param @ tree    - The tree that is going to rotate its left child, the left child will
+ *                   be the root of the tree after rotation.
+ * retval@ Node *  - The tree that had been rotated.
  */ 
 Node *rightRotate(Node *tree)
 {
@@ -61,6 +74,13 @@ Node *rightRotate(Node *tree)
   tree = tree->left;
   tree->right = oldRoot;
   tree->right->left = leftRight;
+  
+  if(tree->balanceFactor)
+    tree->right->balanceFactor+= 2;
+  else
+    tree->right->balanceFactor++;
+  
+  tree->balanceFactor++;
   
   return tree;
 }
