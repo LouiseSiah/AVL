@@ -20,15 +20,19 @@ int avlAdd(Node **rootPtr, Node *newNode)
       (*rootPtr)->left = newNode;
       
       if((*rootPtr)->balanceFactor == -1)
-        return 1;
+        valueReturn = 1;
+      
+      return valueReturn;
       
     }
   
     else
     {
-      (*rootPtr)->balanceFactor--;
       valueReturn = avlAdd(&(*rootPtr)->left, newNode);
-    }
+      if(valueReturn)
+        (*rootPtr)->balanceFactor--;
+    } 
+    
 
   }
   
@@ -40,16 +44,22 @@ int avlAdd(Node **rootPtr, Node *newNode)
       (*rootPtr)->right = newNode;
       
       if((*rootPtr)->balanceFactor == 1)
-        return 1;
+        valueReturn = 1;
+      
+      return valueReturn;
     }
   
     else
     {
-      (*rootPtr)->balanceFactor++;
       valueReturn = avlAdd(&(*rootPtr)->right, newNode);
+      if(valueReturn)
+        (*rootPtr)->balanceFactor++;
     }
   }
   
+  if(((*rootPtr)->balanceFactor == 1) || ((*rootPtr)->balanceFactor == -1))
+    valueReturn = 1;
+      
   return valueReturn;
     
 }

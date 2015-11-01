@@ -90,19 +90,21 @@ void test_avlAdd_add_node60_should_able_correct_root_balanceFactor_to_plus1_and_
 }
 
 /**
- *     50(1)       20          50(0)
- *        \       ------>      / \
- *      60(0)              20(0) 60(0)
+ *     50(0)       20 ,60       50(0)
+ *                 ------>      / \
+ *                         20(0) 60(0)
  */
-void test_avlAdd_add_node20_should_able_correct_root_balanceFactor_to_0_and_return_0(void)
+void test_avlAdd_add_node20_and_node60_should_able_correct_root_balanceFactor_to_0_and_return_0(void)
 {
   int change;
   setNode(0, 20, NULL, NULL, &node20);
   setNode(0, 60, NULL, NULL, &node60);
-  setNode(1, 50, NULL, &node60, &node50);
+  setNode(0, 50, NULL, NULL, &node50);
   Node *root = &node50;
 
   change = avlAdd(&root, &node20);
+  TEST_ASSERT_EQUAL(1, change);
+  change = avlAdd(&root, &node60);
   TEST_ASSERT_EQUAL(0, change);
   TEST_ASSERT_EQUAL_TREE(0, 50, &node20, &node60, root);
   TEST_ASSERT_EQUAL_TREE(0, 20, NULL, NULL, root->left);
