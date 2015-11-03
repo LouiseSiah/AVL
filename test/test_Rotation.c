@@ -30,7 +30,7 @@ void test_leftRotate_given_NULL_tree_should_catch_the_error(void)
 }
 
 /*          Before               After
- *        30(-1)                 30(-1)     
+ *        30(-1)                 30(-1)
  *         /  \                  /  \
  *       20  NULL              20  NULL
  */
@@ -57,8 +57,8 @@ void test_leftRotate_given_tree1_should_catch_the_error(void)
  *           20(+2)                            40(0)
  *             \                               /   \
  *            40(+1)                       20(0)  50(0)
- *              \                    
- *              50(0)                 
+ *              \
+ *              50(0)
  */
 void test_leftRotate_given_balanceFactor_of_rightChild_is_1_should_rotate_as_expect_and_give_correct_balance_factor(void)
 {
@@ -75,34 +75,25 @@ void test_leftRotate_given_balanceFactor_of_rightChild_is_1_should_rotate_as_exp
 
 /*          Before                             After
  *         20(+2)                               60(-1)
- *         /    \                               /    \
- *      10(0)  60(0)                        20(+1)    90(-1)
- *            /    \                        /  \       /
- *         40(0)   90(-1)                10(0) 40(0)  70(0)
- *         / \     /                           / \
- *    30(0) 50(0) 70(0)                     30(0) 50(0)
+ *            \                               /    \
+ *           60(0)                        20(+1)    90(0)
+ *          /    \                           \
+ *       40(0)   90(0)                       40(0)
+ *
  */
 void test_leftRotate_given_balanceFactor_of_rightChild_is_0_should_rotate_as_expect_and_give_correct_balance_factor(void)
 {
-  setNode(0, 10, NULL, NULL, &node10);
-  setNode(0, 30, NULL, NULL, &node30);
-  setNode(0, 50, NULL, NULL, &node50);
-  setNode(0, 70, NULL, NULL, &node70);
-  setNode(0, 40, &node30, &node50, &node40);
-  setNode(-1, 90, &node70, NULL, &node90);
+  setNode(0, 40, NULL, NULL, &node40);
+  setNode(0, 90, NULL, NULL, &node90);
   setNode(0, 60, &node40, &node90, &node60);
-  setNode(2, 20, &node10, &node60, &node20);
+  setNode(2, 20, NULL, &node60, &node20);
 
   Node *tree = leftRotate(&node20);
 
   TEST_ASSERT_EQUAL_TREE(-1, 60, &node20, &node90, tree);
-  TEST_ASSERT_EQUAL_TREE(1, 20, &node10, &node40, tree->left);
-  TEST_ASSERT_EQUAL_TREE(0, 10, NULL, NULL, tree->left->left);
-  TEST_ASSERT_EQUAL_TREE(0, 40, &node30, &node50, tree->left->right);
-  TEST_ASSERT_EQUAL_TREE(0, 30, NULL, NULL, tree->left->right->left);
-  TEST_ASSERT_EQUAL_TREE(0, 50, NULL, NULL, tree->left->right->right);
-  TEST_ASSERT_EQUAL_TREE(-1, 90, &node70, NULL, tree->right);
-  TEST_ASSERT_EQUAL_TREE(0, 70, NULL, NULL, tree->right->left);
+  TEST_ASSERT_EQUAL_TREE(1, 20, NULL, &node40, tree->left);
+  TEST_ASSERT_EQUAL_TREE(0, 40, NULL, NULL, tree->left->right);
+  TEST_ASSERT_EQUAL_TREE(0, 90, NULL, NULL, tree->right);
 }
 
 void test_rightRotate_given_NULL_tree_should_catch_the_error(void)
@@ -151,8 +142,8 @@ void test_rightRotate_given_tree1_should_catch_the_error(void)
  *           50(-2)                           40(0)
  *           /                               /   \
  *         40(-1)                        20(0)  50(0)
- *         /                    
- *        20(0)                 
+ *         /
+ *        20(0)
  */
 void test_rightRotate_given_balanceFactor_of_leftChild_is_minus1_should_rotate_as_expect_and_give_correct_balance_factor(void)
 {
@@ -169,34 +160,24 @@ void test_rightRotate_given_balanceFactor_of_leftChild_is_minus1_should_rotate_a
 
 /*          Before                             After
  *         70(-2)                             30(+1)
- *        /   \                              /    \
- *      30(0)  90(0)                    10(+1)  70(-1)
- *     /   \                              \      /   \
- *  10(+1) 40(0)                         20(0) 40(0)  90(0)
- *   \     /   \                               /   \
- *  20(0) 50(0) 60(0)                       50(0) 60(0)
+ *        /                                   /   \
+ *      30(0)                              10(0)  70(-1)
+ *     /   \                                     /
+ *  10(0) 40(0)                              40(0)
  */
 void test_rightRotate_given_balanceFactor_of_leftChild_is_0_should_rotate_as_expect_and_give_correct_balance_factor(void)
 {
-  setNode(0, 20, NULL, NULL, &node20);
-  setNode(0, 50, NULL, NULL, &node50);
-  setNode(0, 60, NULL, NULL, &node60);
-  setNode(1, 10, NULL, &node20, &node10);
-  setNode(0, 40, &node50, &node60, &node40);
+  setNode(0, 10, NULL, NULL, &node10);
+  setNode(0, 40, NULL, NULL, &node40);
   setNode(0, 30, &node10, &node40, &node30);
-  setNode(0, 90, NULL, NULL, &node90);
-  setNode(-2, 70, &node30, &node90, &node70);
+  setNode(-2, 70, &node30, NULL, &node70);
 
   Node *tree = rightRotate(&node70);
 
   TEST_ASSERT_EQUAL_TREE(1, 30, &node10, &node70, tree);
-  TEST_ASSERT_EQUAL_TREE(1, 10, NULL, &node20, tree->left);
-  TEST_ASSERT_EQUAL_TREE(0, 20, NULL, NULL, tree->left->right);
-  TEST_ASSERT_EQUAL_TREE(-1, 70, &node40, &node90, tree->right);
-  TEST_ASSERT_EQUAL_TREE(0, 40, &node50, &node60, tree->right->left);
-  TEST_ASSERT_EQUAL_TREE(0, 50, NULL, NULL, tree->right->left->left);
-  TEST_ASSERT_EQUAL_TREE(0, 60, NULL, NULL, tree->right->left->right);
-  TEST_ASSERT_EQUAL_TREE(0, 90, NULL, NULL, tree->right->right);
+  TEST_ASSERT_EQUAL_TREE(0, 10, NULL, NULL, tree->left);
+  TEST_ASSERT_EQUAL_TREE(-1, 70, &node40, NULL, tree->right);
+  TEST_ASSERT_EQUAL_TREE(0, 40, NULL, NULL, tree->right->left);
 }
 
 
@@ -213,7 +194,7 @@ void test_leftRightRotate_given_NULL_tree_should_catch_the_error(void)
   {
     TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
     TEST_ASSERT_EQUAL(TREE_IS_EMPTY, err->errorCode);
-    
+
     freeError(err);
   }
 }
@@ -221,12 +202,12 @@ void test_leftRightRotate_given_NULL_tree_should_catch_the_error(void)
 /*          Before               After
  *          30                    30
  *         /  \                  /  \
- *     NULL NULL             NULL   NULL  
+ *     NULL NULL             NULL   NULL
  */
 void test_leftRightRotate_given_tree1A_should_catch_the_error(void)
 {
   setNode(0, 30, NULL, NULL, &node30);
-  
+
   ErrorObject *err;
   Try
   {
@@ -245,13 +226,13 @@ void test_leftRightRotate_given_tree1A_should_catch_the_error(void)
 /*          Before               After
  *          30                    30
  *         /  \                  /  \
- *     node20 NULL        node20    NULL  
+ *     node20 NULL        node20    NULL
  */
 void test_leftRightRotate_given_tree1_should_catch_the_error(void)
 {
   setNode(0, 20, NULL, NULL, &node20);
   setNode(0, 30, &node20, NULL, &node30);
-  
+
   ErrorObject *err;
   Try
   {
@@ -285,9 +266,9 @@ void test_leftRightRotate_given_tree2LR_should_rotate_as_expect(void)
   setNode(0, 40, &node30, &node50, &node40);
   setNode(0, 20, &node10, &node40, &node20);
   setNode(0, 60, &node20, &node70, &node60);
-  
+
   Node *tree = leftRightRotate(&node60);
-  
+
   TEST_ASSERT_EQUAL_TREE(0, 40, &node20, &node60, tree);
   TEST_ASSERT_EQUAL_TREE(0, 20, &node10, &node30, tree->left);
   TEST_ASSERT_EQUAL_TREE(0, 60, &node50, &node70, tree->right);
@@ -306,7 +287,7 @@ void test_rightLeftRotate_given_NULL_tree_should_catch_the_error(void)
   {
     TEST_ASSERT_EQUAL_STRING("Hey!The tree is NULL, nothing to rotate.", err->errorMsg);
     TEST_ASSERT_EQUAL(TREE_IS_EMPTY, err->errorCode);
-    
+
     freeError(err);
   }
 }
@@ -377,7 +358,7 @@ void test_rightLeftRotate_given_tree2RL_should_rotate_as_expect(void)
   setNode(0, 40, &node30, &node50, &node40);
   setNode(0, 60, &node40, &node70, &node60);
   setNode(0, 20, &node10, &node60, &node20);
-  
+
   Node *tree = rightLeftRotate(&node20);
 
   TEST_ASSERT_EQUAL_TREE(0, 40, &node20, &node60, tree);
