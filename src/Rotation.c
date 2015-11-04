@@ -34,12 +34,12 @@ Node *leftRotate(Node *tree)
   tree->left = oldRoot;
   tree->left->right = rightLeft;
 
-  if(tree->balanceFactor)
-    tree->left->balanceFactor-= 2;
-  else
-    tree->left->balanceFactor--;
+  // if(tree->balanceFactor)
+    // tree->left->balanceFactor-= 2;
+  // else
+    // tree->left->balanceFactor--;
 
-  tree->balanceFactor--;
+  // tree->balanceFactor--;
 
   return tree;
 }
@@ -75,12 +75,12 @@ Node *rightRotate(Node *tree)
   tree->right = oldRoot;
   tree->right->left = leftRight;
 
-  if(tree->balanceFactor == -1)
-    tree->right->balanceFactor+= 2;
-  else
-    tree->right->balanceFactor++;  
+  // if(tree->balanceFactor == -1)
+    // tree->right->balanceFactor+= 2;
+  // else
+    // tree->right->balanceFactor++;  
 
-  tree->balanceFactor++;
+  // tree->balanceFactor++;
 
   return tree;
 }

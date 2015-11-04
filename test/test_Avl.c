@@ -250,6 +250,93 @@ void test_avlAdd_add_node90_rightchild_give_plus2_violation_then_leftRotate_shou
   TEST_ASSERT_EQUAL_TREE(0, 90, NULL, NULL, root->right->right);
 }
 
+/** Before Adding       Adding                               After adding and rotation
+ *    50(+1)           50(+2)<--VIOLATION, rightLeftRotate       60(0)
+ *      \       60       \         |                              /  \
+ *     70(0)  ----->     70(-1) <--                           50(0) 70(0)
+ *                       /
+ *                     60(0)  
+ */
+void test_avlAdd_give_plus2_violation_0_minus1_then_rightLeftRotate_should_not_have_any_violation_(void)
+{
+  int change;
+  setNode(0, 70, NULL, NULL, &node70);
+  setNode(0, 50, NULL, NULL, &node50);
+  setNode(0, 60, NULL, NULL, &node60);
+
+  Node *root = &node50;
+
+  change = avlAdd(&root, &node70);
+  TEST_ASSERT_EQUAL(1, change);
+  change = avlAdd(&root, &node60);
+  TEST_ASSERT_EQUAL(0, change);
+  TEST_ASSERT_EQUAL_TREE(0, 60, &node50, &node70, root);
+  TEST_ASSERT_EQUAL_TREE(0, 50, NULL, NULL, root->left);
+  TEST_ASSERT_EQUAL_TREE(0, 70, NULL, NULL, root->right);
+}
+
+/** Before Adding          Adding                               After adding and rotation
+ *    50(+1)               50(+2) <--VIOLATION, rightLeftRotate    80(0)
+ *   /   \       70       /   \         |                          /   \         
+ * 40(0) 90(0)  ----->  40(0) 90(-1) <--                       50(0)   90(+1)
+ *     /    \                /    \                             /  \     \   
+ *   80(0) 100(0)         80(-1) 100(0)                      40（0） 70(0) 100(0) 
+ *                        /
+ *                      70（0）
+ */
+void test_avlAdd_give_plus2_violation_minus1_minus1_then_rightLeftRotate_should_not_have_any_violation_(void)
+{
+  int change;
+  setNode(0, 70, NULL, NULL, &node70);
+  setNode(0, 40, NULL, NULL, &node40);
+  setNode(0, 80, NULL, NULL, &node80);
+  setNode(0, 100, NULL, NULL, &node100);
+  setNode(0, 90, &node80, &node100, &node90);
+  setNode(1, 50, &node40, &node90, &node50);
+
+  Node *root = &node50;
+
+  change = avlAdd(&root, &node70);
+  TEST_ASSERT_EQUAL(0, change);
+  TEST_ASSERT_EQUAL_TREE(0, 80, &node50, &node90, root);
+  TEST_ASSERT_EQUAL_TREE(0, 50, &node40, &node70, root->left);
+  TEST_ASSERT_EQUAL_TREE(0, 40, NULL, NULL, root->left->left);
+  TEST_ASSERT_EQUAL_TREE(0, 70, NULL, NULL, root->left->right);
+  TEST_ASSERT_EQUAL_TREE(1, 90, NULL, &node100, root->right);
+  TEST_ASSERT_EQUAL_TREE(0, 100, NULL, NULL, root->right->right);
+}
+
+/** Before Adding          Adding                               After adding and rotation
+ *    50(+1)               50(+2) <--VIOLATION, rightLeftRotate    70(0)
+ *   /   \       80       /   \         |                          /   \         
+ * 40(0) 90(0)  ----->  40(0) 90(-1) <--                       50(-1)   90(0)
+ *     /    \                /    \                             /      /  \   
+ *   70(0) 100(0)         70(+1) 100(0)                      40（0） 80(0) 100(0) 
+ *                          \
+ *                          80（0）
+ */
+void test_avlAdd_give_plus2_violation_1_minus1_then_rightLeftRotate_should_not_have_any_violation_(void)
+{
+  int change;
+  setNode(0, 70, NULL, NULL, &node70);
+  setNode(0, 40, NULL, NULL, &node40);
+  setNode(0, 80, NULL, NULL, &node80);
+  setNode(0, 100, NULL, NULL, &node100);
+  setNode(0, 90, &node70, &node100, &node90);
+  setNode(1, 50, &node40, &node90, &node50);
+
+  Node *root = &node50;
+
+  change = avlAdd(&root, &node80);
+  TEST_ASSERT_EQUAL(0, change);
+  TEST_ASSERT_EQUAL_TREE(0, 70, &node50, &node90, root);
+  TEST_ASSERT_EQUAL_TREE(-1, 50, &node40, NULL, root->left);
+  TEST_ASSERT_EQUAL_TREE(0, 40, NULL, NULL, root->left->left);
+  TEST_ASSERT_EQUAL_TREE(0, 90, &node80, &node100, root->right);
+  TEST_ASSERT_EQUAL_TREE(0, 80, NULL, NULL, root->right->left);
+  TEST_ASSERT_EQUAL_TREE(0, 100, NULL, NULL, root->right->right);
+}
+
 /** Before Adding       Adding                              After adding and rotation
  *    70(-1)           70(-2)<--VIOLATION, rightRotate         50(0)
  *    /       30       /                                      /  \
@@ -303,4 +390,91 @@ void test_avlAdd_add_node10_leftchild_give_minus2_violation_then_rightRotate_sho
   TEST_ASSERT_EQUAL_TREE(0, 80, NULL, NULL, root->right);
   TEST_ASSERT_EQUAL_TREE(0, 10, NULL, NULL, root->left->left);
   TEST_ASSERT_EQUAL_TREE(0, 60, NULL, NULL, root->left->right);
+}
+
+/** Before Adding       Adding                               After adding and rotation
+ *    80(-1)           80(-2)<--VIOLATION, leftRightRotate    70(0)
+ *    /        70      /       |                              /  \
+ * 60(0)    ----->   60(1) <---                            60(0) 80(0)
+ *                    \
+ *                    70(0)  
+ */
+void test_avlAdd_give_minus2_violation_1_0_then_leftRightRotate_should_not_have_any_violation_(void)
+{
+  int change;
+  setNode(0, 70, NULL, NULL, &node70);
+  setNode(0, 60, NULL, NULL, &node60);
+  setNode(0, 80, NULL, NULL, &node80);
+
+  Node *root = &node80;
+
+  change = avlAdd(&root, &node60);
+  TEST_ASSERT_EQUAL(1, change);
+  change = avlAdd(&root, &node70);
+  TEST_ASSERT_EQUAL(0, change);
+  TEST_ASSERT_EQUAL_TREE(0, 70, &node60, &node80, root);
+  TEST_ASSERT_EQUAL_TREE(0, 60, NULL, NULL, root->left);
+  TEST_ASSERT_EQUAL_TREE(0, 80, NULL, NULL, root->right);
+}
+
+/**    Before Adding                        Adding                        After adding and rotation
+ *       90(-1)               VIOLATION--->   90(-2)                              80(0)
+ *      /   \       70     leftRightRotate   /   \                               /    \         
+ *    60(0) 100(0) ----->              --> 60(+1) 100(0)                      60(0)   90(+1)
+ *   /  \                                 /  \                               /  \       \   
+ * 40(0) 80(0)                         40(0) 80(-1)                      40(0) 70(0)   100(0) 
+ *                                          /
+ *                                         70（0）
+ */
+void test_avlAdd_give_minus2_violation_1_minus1_then_leftRightRotate_should_not_have_any_violation_(void)
+{
+  int change;
+  setNode(0, 70, NULL, NULL, &node70);
+  setNode(0, 80, NULL, NULL, &node80);
+  setNode(0, 40, NULL, NULL, &node40);
+  setNode(0, 60, &node40, &node80, &node60);
+  setNode(0, 100, NULL, NULL, &node100);
+  setNode(-1, 90, &node60, &node100, &node90);
+
+  Node *root = &node90;
+
+  change = avlAdd(&root, &node70);
+  TEST_ASSERT_EQUAL(0, change);
+  TEST_ASSERT_EQUAL_TREE(0, 80, &node60, &node90, root);
+  TEST_ASSERT_EQUAL_TREE(0, 60, &node40, &node70, root->left);
+  TEST_ASSERT_EQUAL_TREE(0, 40, NULL, NULL, root->left->left);
+  TEST_ASSERT_EQUAL_TREE(0, 70, NULL, NULL, root->left->right);
+  TEST_ASSERT_EQUAL_TREE(1, 90, NULL, &node100, root->right);
+  TEST_ASSERT_EQUAL_TREE(0, 100, NULL, NULL, root->right->right);
+}
+
+/**    Before Adding                        Adding                        After adding and rotation
+ *       90(-1)               VIOLATION--->   90(-2)                              70(0)
+ *      /   \       80     leftRightRotate   /   \                               /    \         
+ *    60(0) 100(0) ----->              --> 60(+1) 100(0)                      60(-1)   90(0)
+ *   /  \                                 /  \                               /        / \   
+ * 40(0) 70(0)                         40(0) 70(+1)                      40(0)     80(0) 100(0) 
+ *                                             \
+ *                                            80（0）
+ */
+void test_avlAdd_give_minus2_violation_1_1_then_leftRightRotate_should_not_have_any_violation_(void)
+{
+  int change;
+  setNode(0, 70, NULL, NULL, &node70);
+  setNode(0, 80, NULL, NULL, &node80);
+  setNode(0, 40, NULL, NULL, &node40);
+  setNode(0, 60, &node40, &node70, &node60);
+  setNode(0, 100, NULL, NULL, &node100);
+  setNode(-1, 90, &node60, &node100, &node90);
+
+  Node *root = &node90;
+
+  change = avlAdd(&root, &node80);
+  TEST_ASSERT_EQUAL(0, change);
+  TEST_ASSERT_EQUAL_TREE(0, 70, &node60, &node90, root);
+  TEST_ASSERT_EQUAL_TREE(-1, 60, &node40, NULL, root->left);
+  TEST_ASSERT_EQUAL_TREE(0, 40, NULL, NULL, root->left->left);
+  TEST_ASSERT_EQUAL_TREE(0, 90, &node80, &node100, root->right);
+  TEST_ASSERT_EQUAL_TREE(0, 80, NULL, NULL, root->right->left);
+  TEST_ASSERT_EQUAL_TREE(0, 100, NULL, NULL, root->right->right);
 }

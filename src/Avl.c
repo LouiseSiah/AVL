@@ -42,20 +42,80 @@ int avlAdd(Node **rootPtr, Node *newNode)
       (*rootPtr)->balanceFactor++;
   }
 
-  if((*rootPtr)->balanceFactor == 2)
+  //double rotation: rightLeftRotate()
+  if(((*rootPtr)->balanceFactor == 2) && ((*rootPtr)->right->balanceFactor == -1))
   {
-    if((*rootPtr)->right->balanceFactor == -1)
-      printf("hello\n");
-    else;
-     *rootPtr = leftRotate(*rootPtr);
+    *rootPtr = rightLeftRotate(*rootPtr);
+    
+    if((*rootPtr)->balanceFactor == 1)
+    {
+      (*rootPtr)->left->balanceFactor = -1;
+      (*rootPtr)->right->balanceFactor = 0;
+      (*rootPtr)->balanceFactor = 0;
+    }
+    else if((*rootPtr)->balanceFactor == -1)
+    {
+      (*rootPtr)->left->balanceFactor = 0;
+      (*rootPtr)->right->balanceFactor = 1;
+      (*rootPtr)->balanceFactor = 0;
+    }
+    else
+    {
+      (*rootPtr)->left->balanceFactor = 0;
+      (*rootPtr)->right->balanceFactor = 0;
+      (*rootPtr)->balanceFactor = 0;
+    }
+        
+  }
+
+  //single rotation: leftRotate()
+  if(((*rootPtr)->balanceFactor == 2) && (((*rootPtr)->right->balanceFactor == 1) ||  ((*rootPtr)->right->balanceFactor == 0)) )
+  {
+    *rootPtr = leftRotate(*rootPtr);
+    if((*rootPtr)->balanceFactor)
+      (*rootPtr)->left->balanceFactor-= 2;
+    else
+      (*rootPtr)->left->balanceFactor--;
+
+    (*rootPtr)->balanceFactor--;
   }
   
-  if((*rootPtr)->balanceFactor == -2)
+  //double rotation: leftRightRotate()
+  if(((*rootPtr)->balanceFactor == -2) && ((*rootPtr)->left->balanceFactor == 1))
   {
-    if((*rootPtr)->left->balanceFactor == 1)
-      printf("hello\n");
-    else;
-     *rootPtr = rightRotate(*rootPtr);
+    *rootPtr = leftRightRotate(*rootPtr);
+    
+    if((*rootPtr)->balanceFactor == -1)
+    {
+      (*rootPtr)->right->balanceFactor = 1;
+      (*rootPtr)->left->balanceFactor = 0;
+      (*rootPtr)->balanceFactor = 0;
+    }
+    else if((*rootPtr)->balanceFactor == 1)
+    {
+      (*rootPtr)->right->balanceFactor = 0;
+      (*rootPtr)->left->balanceFactor = -1;
+      (*rootPtr)->balanceFactor = 0;
+    }
+    else
+    {
+      (*rootPtr)->left->balanceFactor = 0;
+      (*rootPtr)->right->balanceFactor = 0;
+      (*rootPtr)->balanceFactor = 0;
+    }
+  }
+
+  //single rotation: righttRotate()    
+  if(((*rootPtr)->balanceFactor == -2) && (((*rootPtr)->left->balanceFactor == -1) || ((*rootPtr)->left->balanceFactor == 0)))
+  {
+    *rootPtr = rightRotate(*rootPtr);
+    if((*rootPtr)->balanceFactor == -1)
+      (*rootPtr)->right->balanceFactor+= 2;
+    else
+      (*rootPtr)->right->balanceFactor++;  
+
+    (*rootPtr)->balanceFactor++;
+
   }
     
   if( (!bFBefore) &&  (((*rootPtr)->balanceFactor == 1) || ((*rootPtr)->balanceFactor == -1)) )
