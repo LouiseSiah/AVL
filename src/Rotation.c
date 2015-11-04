@@ -108,19 +108,8 @@ Node *leftRightRotate(Node *tree)
   if(!(tree->left))
     throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
 
-  if(!(tree->left->right))
-    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
-
-  Node *newRight = tree;
-  Node *newLeft = tree->left;
-  Node *newLeftRight = tree->left->right->left;
-  Node *newRightLeft = tree->left->right->right;
-
-  tree = tree->left->right;
-  tree->left = newLeft;
-  tree->right = newRight;
-  tree->left->right = newLeftRight;
-  tree->right->left = newRightLeft;
+  tree->left = leftRotate(tree->left);
+  tree = rightRotate(tree);
 
   return tree;
 }
@@ -148,19 +137,8 @@ Node *rightLeftRotate(Node *tree)
   if(!(tree->right))
     throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
 
-  if(!(tree->right->left))
-    throwError("Hey! There is no Child to rotate.", NO_CHILD_TO_ROTATE);
-
-  Node *newLeft = tree;
-  Node *newRight = tree->right;
-  Node *newLeftRight = tree->right->left->left;
-  Node *newRightLeft = tree->right->left->right;
-
-  tree = tree->right->left;
-  tree->left = newLeft;
-  tree->right = newRight;
-  tree->left->right = newLeftRight;
-  tree->right->left = newRightLeft;
+  tree->right = rightRotate(tree->right);
+  tree = leftRotate(tree);
 
   return tree;
 }
