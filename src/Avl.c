@@ -16,26 +16,26 @@ int avlAdd(Node **rootPtr, Node *newNode)
 
   bFBefore = (*rootPtr)->balanceFactor;
 
-  if( (newNode->data < (*rootPtr)->data) && (!(*rootPtr)->left) )
+  if(newNode->data < (*rootPtr)->data && !(*rootPtr)->left )
   {
       (*rootPtr)->balanceFactor--;
       (*rootPtr)->left = newNode;
   }
 
-  else if ( (newNode->data < (*rootPtr)->data) && (*rootPtr)->left )
+  if(newNode->data < (*rootPtr)->data && (*rootPtr)->left )
   {
     valueReturn = avlAdd(&(*rootPtr)->left, newNode);
     if(valueReturn)
       (*rootPtr)->balanceFactor--;
   }
 
-  else if ( (newNode->data > (*rootPtr)->data) && (!(*rootPtr)->right) )
+  if(newNode->data > (*rootPtr)->data && !(*rootPtr)->right )
   {
     (*rootPtr)->balanceFactor++;
     (*rootPtr)->right = newNode;
   }
 
-  else if ( (newNode->data > (*rootPtr)->data) && (*rootPtr)->right ) 
+  if(newNode->data > (*rootPtr)->data && (*rootPtr)->right ) 
   {
     valueReturn = avlAdd(&(*rootPtr)->right, newNode);
     if(valueReturn)
@@ -43,7 +43,7 @@ int avlAdd(Node **rootPtr, Node *newNode)
   }
 
   //double rotation: rightLeftRotate()
-  if(((*rootPtr)->balanceFactor == 2) && ((*rootPtr)->right->balanceFactor == -1))
+  if((*rootPtr)->balanceFactor == 2 && (*rootPtr)->right->balanceFactor == -1)
   {
     *rootPtr = rightLeftRotate(*rootPtr);
     
@@ -123,4 +123,44 @@ int avlAdd(Node **rootPtr, Node *newNode)
 
   return 0;
 
+}
+
+
+Node *avlRemove(Node **rootPtr, int value, int *heightChange)
+{
+  Node *remove;
+  int bFBefore;
+  
+  if(!(*rootPtr))
+    throwError("Hey!The root is NULL, cannot remove any node from empty tree.", TREE_IS_EMPTY);
+  
+  bFBefore = (*rootPtr)->balanceFactor;
+  
+  if(value < (*rootPtr)->data && value != (*rootPtr)->left->data) 
+    remove = avlRemove( &((*rootPtr)->left), value, heightChange);
+  
+  if(value > (*rootPtr)->data && value != (*rootPtr)->right->data ) 
+    remove = avlRemove( &((*rootPtr)->right), value, heightChange);
+  
+  if(value == (*rootPtr)->left->data)
+  {
+    remove = (*rootPtr)->left;
+    (*rootPtr)->left = NULL;
+    (*rootPtr)->balanceFactor++;
+  }
+  
+  if(value == (*rootPtr)->right->data)
+  {
+    remove = (*rootPtr)->right;
+    (*rootPtr)->right = NULL;
+    (*rootPtr)->balanceFactor--;
+  }
+
+  if((bFBefore == 1 || bFBefore == -1) &&  !((*rootPtr)->balanceFactor) )
+    *heightChange = 1;
+  
+  *heightChange = 0;
+  
+  return remove;
+  
 }
